@@ -1,0 +1,40 @@
+import { createClient } from '@supabase/supabase-js'
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  const { name, score } = req.body;
+
+  if (!name || score === undefined || score > 20000) {
+    return res.status(400).json({ error: "Data tidak valid!" });
+  }
+
+  const supabase = createClient(
+    process.env.SUPBASE_URL, 
+    process.env.SUPBASE_KEY
+  );
+
+  try {
+    // MENGGUNAKAN UPSERT: 
+    // Jika 'name' sudah ada, update datanya. 
+    // 'onConflict' memaksa pengecekan pada kolom 'name'.
+    const { data, error } = await supabase
+      .from('leaderboard')
+      .upsert(
+        { name, score, created_at: new Date().toISOString() }, 
+        { onConflict: 'name', ignoreDuplicates: false }
+      )
+      .select();
+
+    // Catatan: Jika Anda ingin hanya mengupdate skor jika skor BARU > skor LAMA, 
+    // logika di atas akan menimpa skor lama secara otomatis. 
+    // Untuk proteksi lebih ketat (Hanya simpan yang tertinggi), kita bisa tambahkan filter.
+
+    if (error) throw error;
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}

@@ -222,4 +222,67 @@
             to { text-shadow: 0 0 20px var(--c-yellow); opacity: 1; }
         }
 
-   
+   /* Container Tab Leaderboard */
+.leaderboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.leaderboard-tabs button {
+    background: transparent;
+    border: 1px solid var(--c-yellow);
+    color: var(--c-yellow);
+    padding: 6px 12px;
+    font-size: 11px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.leaderboard-tabs button:hover, .leaderboard-tabs button.active {
+    background: var(--c-yellow);
+    color: #000;
+    box-shadow: 0 0 10px var(--c-yellow);
+}
+
+/* Section Contact Us */
+.contact-section {
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.contact-section h4 {
+    color: var(--c-red);
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px var(--c-red);
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Membagi 2 kolom agar rapi di HP */
+    gap: 10px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+/* Warna khusus saat di-hover sesuai brand */
+.social-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}

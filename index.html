@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header id="top-bar">
         <h1>Neon Lane Clash</h1>
         <div>
@@ -19,12 +20,12 @@
     </header>
     <section id="hud">
         <div class="hud-group">
-            <span class="hud-label">SCORE</span>
+            <span class="hud-label">SKOR</span>
             <span class="hud-value" id="score-display">0</span>
         </div>
         <div class="hud-group">
-            <span class="hud-label">LIVES</span>
-            <span class="hud-value" style="color: var(--c-red)" id="lives-display">❤❤❤</span>
+            <span class="hud-label">NYAWA</span>
+            <span class="hud-value" style="color: var(--c-red)" id="lives-display">❤️❤️❤️</span>
         </div>
         <div class="hud-group">
             <span class="hud-label">MODE</span>
@@ -35,9 +36,11 @@
             <span class="hud-value" id="next-display">Next: 50</span>
         </div>
             <div class="hud-group">
-        <span class="hud-label">HIGH SCORE</span>
+        <span class="hud-label">SKOR TERTINGGI</span>
         <span class="hud-value" id="highscore-display" style="color: var(--c-white)">0</span>
     </div>
+    
+    
     </section>
     <div id="game-container">
         <canvas id="gameCanvas"></canvas>
@@ -51,32 +54,49 @@
 
     <div id="about-overlay" class="overlay">
         <h2>About</h2>
-        <p>Color Reflex Game: Match the colors to score. If you miss, your score will decrease. Don't be careless so that the money bag doesn't get missed.</p>
-        <p><b>Goal:</b> Survive and Score High.</p>
+        <p>Permainan Refleks Warna: Cocokkan warna untuk mendapatkan skor. Jika Anda salah, skor Anda akan berkurang. Jangan ceroboh agar kantong uang tidak terlewatkan.</p>
+        <p><b>Sasaran:</b> Bertahan dan Raih Skor Tinggi.</p>
         <button class="close-btn" onclick="app.ui.toggleOverlay('about')">Close</button>
     </div>
 
     <div id="contact-overlay" class="overlay">
-        <h2>Contact</h2>
-        <p>Game Designer: Zuya <br>WhatsApp: +628222125358 <br>Location: Adalah Pokoknya</p>
-        <button class="close-btn" onclick="app.ui.toggleOverlay('contact')">Close</button>
+        <h2>Kontak</h2>
+        <div class="social-links">
+            <a href="mailto:emailmu@gmail.com">📧 Email</a>
+            <a href="https://t.me/zuyaajakali" target="_blank">✈️ Telegram</a>
+            <a href="https://wa.me/628xxx" target="_blank">💬 WhatsApp</a>
+            <a href="https://tiktok.com/@idmu" target="_blank">🎵 TikTok</a>
+        </div>
+        <button class="close-btn" onclick="app.ui.toggleOverlay('contact')">Tutup</button>
     </div>
 
 <div id="game-over-overlay" class="overlay">
-    <h1>GAME OVER</h1>
+    <h1>KAMU GAGAL</h1>
     <p id="final-score"></p>
     <hr style="width: 80%; opacity: 0.2;">
-    <div id="global-leaderboard" style="font-size: 14px; color: var(--c-lime); margin: 10px 0;">
-        Loading Leaderboard...
+    
+    <div id="leaderboard-panel">
+    <div class="leaderboard-tabs">
+        <button id="btn-all" class="active" onclick="changeTab('all')">Seluruh Waktu</button>
+        <button id="btn-weekly" onclick="changeTab('weekly')">Mingguan</button>
+        <button id="btn-daily" onclick="changeTab('daily')">Harian</button>
     </div>
-    <button class="close-btn" onclick="location.reload()">RETRY</button>
+    
+    <div id="global-leaderboard">
+        </div>
+
+    
+</div>
+
+    
+    <button class="close-btn" onclick="location.reload()">COBA LAGI</button>
 </div>
 <div id="name-overlay" class="overlay">
-    <h2>NEW HERO</h2>
-    <p>Enter your name to log in to the dark</p>
-    <input type="text" id="player-name-input" maxlength="12" placeholder="YOUR NAME" 
+    <h2>PEJUANG BARU</h2>
+    <p>Masukkan nama Anda untuk masuk ke Isekai</p>
+    <input type="text" id="player-name-input" maxlength="12" placeholder="NAMA KAMU SIAPA" 
            style="padding: 12px; background: #222; border: 2px solid var(--c-blue); color: white; text-align: center; font-size: 20px; outline: none; box-shadow: 0 0 10px var(--c-blue); border-radius: 8px; margin-bottom: 20px;">
-    <button class="close-btn" onclick="app.ui.saveName()">START MISSION</button>
+    <button class="close-btn" onclick="app.ui.saveName()">MULAI MAIN</button>
 </div>
 <script src="script.js"></script>
 </body>
