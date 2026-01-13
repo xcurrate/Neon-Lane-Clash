@@ -1,0 +1,225 @@
+    
+        :root {
+            --c-red: #ff004d;
+            --c-blue: #00a8ff;
+            --c-lime: #00ff00; /* Base Green (Lime) */
+            --c-yellow: #fff200;
+            --c-purple: #9b59b6;
+            --c-orange: #e67e22;
+            --c-green: #2ecc71; /* Mixed Green */
+            
+            /* UPDATED: Darker theme colors */
+            --c-bg: #000000; /* Pure black background */
+            --c-panel-bg: rgba(15, 15, 15, 0.9); /* Darker UI panels */
+            --c-text: #ffffff;
+            
+            --h-top: 64px;
+            --h-hud: 72px;
+        }
+
+        * {
+            box-sizing: border-box;
+            touch-action: none; /* Disable default touch actions */
+            user-select: none; /* Disable text selection */
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Removes mobile tap flash */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--c-bg);
+            color: var(--c-text);
+            overflow: hidden; /* No scroll */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- LAYOUT --- */
+        
+        /* 1. Top Bar */
+        #top-bar {
+            height: var(--h-top);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            /* UPDATED: Darker background and subtler border */
+            background: var(--c-panel-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* UPDATED: Subtler text shadow */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            color: #ccc;
+        }
+
+        .btn-sm {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ccc;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: all 0.2s;
+        }
+        .btn-sm:active { background: rgba(255,255,255,0.1); }
+
+        /* 2. HUD */
+        #hud {
+            height: var(--h-hud);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            /* UPDATED: Darker background */
+            background: rgba(5, 5, 5, 0.8);
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hud-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hud-label {
+            font-size: 10px;
+            opacity: 0.5;
+            margin-bottom: 4px;
+            color: #aaa;
+        }
+
+        .hud-value {
+            font-size: 18px;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        #mode-display.boost {
+            color: var(--c-yellow);
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        /* 3. Game Area */
+        #game-container {
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            /* UPDATED: Darker gradient */
+            background: radial-gradient(circle at center, #111111 0%, #000000 80%);
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 4. Controls */
+        #controls {
+            height: auto;
+            min-height: 140px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            /* UPDATED: Darker background for control area */
+            background: #080808;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* UPDATED: New Button Styles (Dark theme, only border glows) */
+        .ctrl-btn {
+            border: none;
+            border-radius: 12px;
+            height: 100px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            transition: transform 0.1s;
+        }
+
+        .ctrl-btn:active {
+            transform: scale(0.95);
+          /*  background: rgba(50, 50, 50, 0.8); /* Slightly lighter on press, but still dark */
+        }
+        
+                .ctrl-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        /* UPDATED: Color classes now affect border and shadow glow, not background */
+        .bg-red {
+            background-color: var(--c-red);
+            box-shadow: 0 0 15px var(--c-red), inset 0 0 5px var(--c-red);
+        }
+        .bg-blue {
+            background-color: var(--c-blue);
+            box-shadow: 0 0 15px var(--c-blue), inset 0 0 5px var(--c-blue);
+        }
+        .bg-lime {
+            background-color: var(--c-lime);
+            box-shadow: 0 0 15px var(--c-lime), inset 0 0 5px var(--c-lime);
+        }
+        .bg-yellow {
+            background-color: var(--c-yellow);
+            box-shadow: 0 0 15px var(--c-yellow), inset 0 0 5px var(--c-yellow);
+        }
+
+
+        /* Overlays */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95); /* Darker overlay */
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .overlay.active { display: flex; }
+        .overlay h2 { color: var(--c-yellow); margin-bottom: 20px; text-shadow: 0 0 10px var(--c-yellow); }
+        .overlay p { line-height: 1.6; max-width: 400px; color: #ccc; }
+        .close-btn { margin-top: 30px; padding: 10px 30px; background: transparent; color: var(--c-blue); border: 2px solid var(--c-blue); font-weight: bold; cursor: pointer; box-shadow: 0 0 10px var(--c-blue); transition: all 0.2s;}
+        .close-btn:active { background: var(--c-blue); color: #000; }
+
+        #game-over-overlay h1 { font-size: 40px; color: var(--c-red); text-shadow: 0 0 20px var(--c-red); }
+
+        @keyframes pulse {
+            from { text-shadow: 0 0 5px var(--c-yellow); opacity: 0.8; }
+            to { text-shadow: 0 0 20px var(--c-yellow); opacity: 1; }
+        }
+
+   
