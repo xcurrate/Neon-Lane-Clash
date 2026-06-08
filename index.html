@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- Top Bar -->
     <header id="top-bar">
         <h1>Neon Lane Clash</h1>
         <div>
@@ -17,7 +16,6 @@
         </div>
     </header>
 
-    <!-- HUD -->
     <section id="hud">
         <div class="hud-group">
             <span class="hud-label">SKOR</span>
@@ -41,7 +39,6 @@
         </div>
     </section>
 
-    <!-- Game Area with Lane Indicator -->
     <div id="game-container">
         <div class="lane-indicator">
             <span>LANES</span>
@@ -50,7 +47,6 @@
         <canvas id="gameCanvas"></canvas>
     </div>
 
-    <!-- Controls with Labels -->
     <section id="controls">
         <div class="control-wrapper">
             <button class="ctrl-btn bg-red" data-color="red" aria-label="Shoot Red"></button>
@@ -70,25 +66,22 @@
         </div>
     </section>
 
-    <!-- About Overlay -->
+    <!-- About -->
     <div id="about-overlay" class="overlay">
         <h2>About Neon Lane Clash</h2>
-        <p>Game refleks warna neon. Cocokkan warna peluru dengan musuh yang datang untuk mendapatkan skor tinggi.</p>
-        
+        <p>Game refleks warna neon. Cocokkan warna peluru dengan musuh yang datang.</p>
         <div class="how-to-play">
             <h3>How to Play</h3>
             <ul>
-                <li>Tekan tombol warna yang sesuai dengan musuh</li>
-                <li>Cocok = Musuh hancur + Score naik</li>
+                <li>Tekan tombol warna sesuai musuh</li>
+                <li>Cocok = Hancur + Score</li>
                 <li>Salah = Nyawa berkurang</li>
-                <li>Kumpulkan coin untuk bonus poin</li>
             </ul>
         </div>
-        
         <button class="close-btn" onclick="app.ui.toggleOverlay('about')">Close</button>
     </div>
 
-    <!-- Contact Overlay -->
+    <!-- Contact -->
     <div id="contact-overlay" class="overlay">
         <h2>Contact</h2>
         <div class="social-links">
@@ -100,11 +93,15 @@
         <button class="close-btn" onclick="app.ui.toggleOverlay('contact')">Tutup</button>
     </div>
 
-    <!-- Game Over Overlay -->
+    <!-- GAME OVER - IMPROVED -->
     <div id="game-over-overlay" class="overlay">
-        <h1>GAME OVER</h1>
-        <p id="final-score" class="final-score"></p>
+        <h1 class="game-over-title">GAME OVER</h1>
         
+        <div class="final-score-container">
+            <p class="final-score-label">SKOR KAMU</p>
+            <p id="final-score" class="final-score-value">0</p>
+        </div>
+
         <div id="leaderboard-panel">
             <h3>Leaderboard</h3>
             <div class="leaderboard-tabs">
@@ -112,17 +109,21 @@
                 <button id="btn-weekly" class="tab-btn" onclick="changeTab('weekly')">Weekly</button>
                 <button id="btn-daily" class="tab-btn" onclick="changeTab('daily')">Daily</button>
             </div>
-            <div id="global-leaderboard"></div>
+            <div id="global-leaderboard">
+                <p class="leaderboard-loading">Memuat...</p>
+            </div>
         </div>
 
-        <button class="close-btn retry-btn" onclick="location.reload()">TRY AGAIN</button>
+        <div class="game-over-actions">
+            <button class="close-btn retry-btn" onclick="location.reload()">TRY AGAIN</button>
+        </div>
     </div>
 
-    <!-- Name Input Overlay -->
+    <!-- Name Input -->
     <div id="name-overlay" class="overlay">
         <h2>NEW WARRIOR</h2>
-        <p>Enter your name to enter the Neon Zone</p>
-        <input type="text" id="player-name-input" maxlength="12" placeholder="YOUR NAME" 
+        <p>Masukkan nama untuk masuk ke Neon Zone</p>
+        <input type="text" id="player-name-input" maxlength="12" placeholder="NAMA KAMU" 
                style="padding: 14px; background: #1a1a1a; border: 2px solid var(--c-blue); color: white; text-align: center; font-size: 22px; outline: none; box-shadow: 0 0 15px var(--c-blue); border-radius: 10px; margin: 20px 0; width: 80%; max-width: 280px;">
         <button class="close-btn" onclick="app.ui.saveName()">START GAME</button>
     </div>
