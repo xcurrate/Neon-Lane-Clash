@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Neon Lane Clash</title>
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Top Bar -->
     <header id="top-bar">
         <h1>Neon Lane Clash</h1>
         <div>
@@ -18,6 +16,8 @@
             <button class="btn-sm" onclick="app.ui.toggleOverlay('contact')">Contact</button>
         </div>
     </header>
+
+    <!-- HUD -->
     <section id="hud">
         <div class="hud-group">
             <span class="hud-label">SKOR</span>
@@ -35,69 +35,98 @@
             <span class="hud-label">STATUS</span>
             <span class="hud-value" id="next-display">Next: 50</span>
         </div>
-            <div class="hud-group">
-        <span class="hud-label">SKOR TERTINGGI</span>
-        <span class="hud-value" id="highscore-display" style="color: var(--c-white)">0</span>
-    </div>
-    
-    
-    </section>
-    <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-    </div>
-    <section id="controls">
-        <button class="ctrl-btn bg-red" data-color="red" aria-label="Shoot Red"></button>
-        <button class="ctrl-btn bg-blue" data-color="blue" aria-label="Shoot Blue"></button>
-        <button class="ctrl-btn bg-lime" data-color="lime" aria-label="Shoot Lime"></button>
-        <button class="ctrl-btn bg-yellow" data-color="yellow" aria-label="Shoot Yellow"></button>
+        <div class="hud-group">
+            <span class="hud-label">HIGH SCORE</span>
+            <span class="hud-value" id="highscore-display" style="color: var(--c-white)">0</span>
+        </div>
     </section>
 
+    <!-- Game Area with Lane Indicator -->
+    <div id="game-container">
+        <div class="lane-indicator">
+            <span>LANES</span>
+            <div class="lane-lines"></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Controls with Labels -->
+    <section id="controls">
+        <div class="control-wrapper">
+            <button class="ctrl-btn bg-red" data-color="red" aria-label="Shoot Red"></button>
+            <span class="ctrl-label">R</span>
+        </div>
+        <div class="control-wrapper">
+            <button class="ctrl-btn bg-blue" data-color="blue" aria-label="Shoot Blue"></button>
+            <span class="ctrl-label">B</span>
+        </div>
+        <div class="control-wrapper">
+            <button class="ctrl-btn bg-lime" data-color="lime" aria-label="Shoot Lime"></button>
+            <span class="ctrl-label">G</span>
+        </div>
+        <div class="control-wrapper">
+            <button class="ctrl-btn bg-yellow" data-color="yellow" aria-label="Shoot Yellow"></button>
+            <span class="ctrl-label">Y</span>
+        </div>
+    </section>
+
+    <!-- About Overlay -->
     <div id="about-overlay" class="overlay">
-        <h2>About</h2>
-        <p>Permainan Refleks Warna: Cocokkan warna untuk mendapatkan skor. Jika Anda salah, skor Anda akan berkurang. Jangan ceroboh agar kantong uang tidak terlewatkan.</p>
-        <p><b>Sasaran:</b> Bertahan dan Raih Skor Tinggi.</p>
+        <h2>About Neon Lane Clash</h2>
+        <p>Game refleks warna neon. Cocokkan warna peluru dengan musuh yang datang untuk mendapatkan skor tinggi.</p>
+        
+        <div class="how-to-play">
+            <h3>How to Play</h3>
+            <ul>
+                <li>Tekan tombol warna yang sesuai dengan musuh</li>
+                <li>Cocok = Musuh hancur + Score naik</li>
+                <li>Salah = Nyawa berkurang</li>
+                <li>Kumpulkan coin untuk bonus poin</li>
+            </ul>
+        </div>
+        
         <button class="close-btn" onclick="app.ui.toggleOverlay('about')">Close</button>
     </div>
 
+    <!-- Contact Overlay -->
     <div id="contact-overlay" class="overlay">
-        <h2>Kontak</h2>
+        <h2>Contact</h2>
         <div class="social-links">
-            <a href="mailto:emailmu@gmail.com">📧 Email</a>
-            <a href="https://t.me/zuyaajakali" target="_blank">✈️ Telegram</a>
-            <a href="https://wa.me/628xxx" target="_blank">💬 WhatsApp</a>
-            <a href="https://tiktok.com/@idmu" target="_blank">🎵 TikTok</a>
+            <a href="mailto:emailmu@gmail.com">Email</a>
+            <a href="https://t.me/zuyaajakali" target="_blank">Telegram</a>
+            <a href="https://wa.me/628xxx" target="_blank">WhatsApp</a>
+            <a href="https://tiktok.com/@idmu" target="_blank">TikTok</a>
         </div>
         <button class="close-btn" onclick="app.ui.toggleOverlay('contact')">Tutup</button>
     </div>
 
-<div id="game-over-overlay" class="overlay">
-    <h1>KAMU GAGAL</h1>
-    <p id="final-score"></p>
-    <hr style="width: 80%; opacity: 0.2;">
-    
-    <div id="leaderboard-panel">
-    <div class="leaderboard-tabs">
-        <button id="btn-all" class="active" onclick="changeTab('all')">Seluruh Waktu</button>
-        <button id="btn-weekly" onclick="changeTab('weekly')">Mingguan</button>
-        <button id="btn-daily" onclick="changeTab('daily')">Harian</button>
-    </div>
-    
-    <div id="global-leaderboard">
+    <!-- Game Over Overlay -->
+    <div id="game-over-overlay" class="overlay">
+        <h1>GAME OVER</h1>
+        <p id="final-score" class="final-score"></p>
+        
+        <div id="leaderboard-panel">
+            <h3>Leaderboard</h3>
+            <div class="leaderboard-tabs">
+                <button id="btn-all" class="tab-btn active" onclick="changeTab('all')">All Time</button>
+                <button id="btn-weekly" class="tab-btn" onclick="changeTab('weekly')">Weekly</button>
+                <button id="btn-daily" class="tab-btn" onclick="changeTab('daily')">Daily</button>
+            </div>
+            <div id="global-leaderboard"></div>
         </div>
 
-    
-</div>
+        <button class="close-btn retry-btn" onclick="location.reload()">TRY AGAIN</button>
+    </div>
 
-    
-    <button class="close-btn" onclick="location.reload()">COBA LAGI</button>
-</div>
-<div id="name-overlay" class="overlay">
-    <h2>PEJUANG BARU</h2>
-    <p>Masukkan nama Anda untuk masuk ke Isekai</p>
-    <input type="text" id="player-name-input" maxlength="12" placeholder="NAMA KAMU SIAPA" 
-           style="padding: 12px; background: #222; border: 2px solid var(--c-blue); color: white; text-align: center; font-size: 20px; outline: none; box-shadow: 0 0 10px var(--c-blue); border-radius: 8px; margin-bottom: 20px;">
-    <button class="close-btn" onclick="app.ui.saveName()">MULAI MAIN</button>
-</div>
-<script src="script.js"></script>
+    <!-- Name Input Overlay -->
+    <div id="name-overlay" class="overlay">
+        <h2>NEW WARRIOR</h2>
+        <p>Enter your name to enter the Neon Zone</p>
+        <input type="text" id="player-name-input" maxlength="12" placeholder="YOUR NAME" 
+               style="padding: 14px; background: #1a1a1a; border: 2px solid var(--c-blue); color: white; text-align: center; font-size: 22px; outline: none; box-shadow: 0 0 15px var(--c-blue); border-radius: 10px; margin: 20px 0; width: 80%; max-width: 280px;">
+        <button class="close-btn" onclick="app.ui.saveName()">START GAME</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
